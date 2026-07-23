@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'">
+  <title>vitalsheet explained — how a private BP &amp; blood sugar log sheet works</title>
+  <meta name="description" content="An animated walkthrough of vitalsheet, the clinic-ready BP log sheet: how home blood-pressure, glucose and weight readings become one dated trend sheet with averages — and why the CSP makes 'nothing leaves this device' enforced, not promised.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet-explained/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Sreenivas Sadhu Prabhakara">
+  <meta name="keywords" content="bp log sheet explained, blood pressure log app how it works, blood sugar log sheet, home bp chart, offline health tracker, private bp diary, clinic trend sheet, hypertension log, diabetes log book, connect-src none privacy">
+  <meta name="theme-color" content="#101113" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="vitalsheet explained">
+  <meta property="og:title" content="vitalsheet explained — how a private BP &amp; blood sugar log sheet works">
+  <meta property="og:description" content="An animated walkthrough: how scattered home BP, glucose and weight readings become one clinic-ready trend sheet — and why nothing can leave your device.">
+  <meta property="og:url" content="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet-explained/">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet-explained/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="vitalsheet explained — a seven-segment 120 over 80 readout with an arrow into a clinic trend sheet, and a blocked arrow to the cloud">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="vitalsheet explained — how a private BP &amp; blood sugar log sheet works">
+  <meta name="twitter:description" content="An animated walkthrough: how scattered home BP, glucose and weight readings become one clinic-ready trend sheet — and why nothing can leave your device.">
+  <meta name="twitter:image" content="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet-explained/og-image.png">
+  <meta name="twitter:image:alt" content="vitalsheet explained — a seven-segment 120 over 80 readout with an arrow into a clinic trend sheet, and a blocked arrow to the cloud">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "vitalsheet explained — how a private BP & blood sugar log sheet works",
+    "description": "An animated, single-page walkthrough of vitalsheet: how home blood-pressure, glucose and weight readings become one dated, clinic-ready trend sheet with plain averages and cited reference bands, and how a strict Content-Security-Policy makes the privacy enforced rather than promised.",
+    "url": "https://sreenivas-sadhu-prabhakara.github.io/vitalsheet-explained/",
+    "author": { "@type": "Person", "name": "Sreenivas Sadhu Prabhakara" },
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "about": {
+      "@type": "WebApplication",
+      "name": "vitalsheet",
+      "description": "A clinic-ready trend sheet that turns home blood-pressure, glucose and weight readings into one dated table with 7-day and 30-day averages, cited reference-band tags, A4 print and CSV export. Runs fully offline.",
+      "url": "https://sreenivas-sadhu-prabhakara.github.io/vitalsheet/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any (modern web browser)",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@type": "Person", "name": "Sreenivas Sadhu Prabhakara" },
+      "softwareVersion": "0.1.0",
+      "featureList": [
+        "Log BP, glucose and weight with a fast numeric form",
+        "7-day and 30-day plain averages of logged readings",
+        "Cited reference-band tags (ACC/AHA, ADA, WHO) shown verbatim",
+        "Print a clinic-ready A4 trend sheet",
+        "Export RFC-4180 CSV and full JSON backup",
+        "Runs 100% offline — readings never leave your device"
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does vitalsheet keep my BP readings private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The app ships a strict Content-Security-Policy with connect-src 'none'. That is a browser-enforced rule: every fetch, XHR or WebSocket the page could ever attempt is refused by the browser itself. There are also no external fonts, scripts or analytics. Readings live only in that browser's local storage, so privacy is enforced by the platform, not promised in a policy document."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a clinic-ready BP log sheet actually contain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dated table of your home readings (newest first), 7-day and 30-day plain arithmetic averages labelled 'average of logged readings', optional cited reference-band tags quoted verbatim, a blank clinician-notes column, and a sources footer with verified-on dates — printed to A4 via the browser's print-to-PDF, or exported as RFC-4180 CSV."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does vitalsheet interpret my blood pressure or sugar readings?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It is a log book, not a diagnosis. It shows plain averages of exactly what you typed and, optionally, published reference-band wording (2017 ACC/AHA blood-pressure categories, the ADA glucose target, WHO BMI classes) quoted verbatim with verified-on dates. It never says improving, worsening, or answers 'is this bad?' — that conversation belongs with a clinician."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an account or an internet connection to use vitalsheet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No account, no sign-up, no connection. The page is fully self-contained: once loaded it works with no signal at all, and because the CSP forbids all network requests there is nothing to sign in to. CSV and JSON export are the backup path."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#story">Skip to the walkthrough</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <div class="brand">
+        <span class="brand__lcd" aria-hidden="true">
+          <span class="seg">120</span><span class="seg seg--slash">/</span><span class="seg">80</span>
+        </span>
+        <span class="brand__name">vitalsheet <em>explained</em></span>
+      </div>
+      <a class="btn btn--small" href="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet/">Open the app</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero wrap">
+      <p class="eyebrow">An animated walkthrough &middot; nothing here phones home either</p>
+      <h1 class="hero__title">BP &amp; Blood Sugar Log Sheet, Explained — How vitalsheet Turns Home Readings into One Clinic-Ready Trend Sheet</h1>
+      <p class="hero__lede">
+        You were told <em>&ldquo;bring your readings to the next appointment.&rdquo;</em>
+        This page walks through — step by animated step — how vitalsheet turns a home cuff,
+        a glucometer and a bathroom scale into one dated sheet your doctor can actually read,
+        without a single number ever leaving your device.
+      </p>
+
+      <div class="hero__stage" aria-hidden="true">
+        <div class="cuff-panel">
+          <div class="cuff-panel__row">
+            <span class="cyc cyc--sys"><i>165</i><i>152</i><i>138</i><i>127</i><i>120</i></span>
+            <span class="cuff-panel__slash">/</span>
+            <span class="cyc cyc--dia"><i>101</i><i>95</i><i>88</i><i>83</i><i>80</i></span>
+          </div>
+          <div class="cuff-panel__unit">mmHg &middot; a reading settles</div>
+        </div>
+        <svg class="hero-arrow" viewBox="0 0 60 24" aria-hidden="true">
+          <path d="M2 12h48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M44 5l10 7-10 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="mini-sheet">
+          <div class="mini-sheet__head">Trend sheet</div>
+          <div class="mini-sheet__line mini-sheet__line--1"></div>
+          <div class="mini-sheet__line mini-sheet__line--2"></div>
+          <div class="mini-sheet__line mini-sheet__line--3"></div>
+          <div class="mini-sheet__avg">avg <span class="num">120/80</span></div>
+        </div>
+      </div>
+      <p class="visually-hidden">Animation: a blood-pressure cuff readout counts down and settles at 120 over 80, then flows into a small trend sheet.</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet/">Try vitalsheet — free, no sign-up</a>
+        <a class="btn btn--ghost" href="#story">See how it works ↓</a>
+      </div>
+    </section>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <section class="section wrap" id="story" data-animate>
+      <p class="step-eyebrow">The problem</p>
+      <h2>&ldquo;Bring your readings&rdquo; usually means a crumpled slip of paper</h2>
+      <div class="split">
+        <div class="split__copy">
+          <p>
+            If you live with hypertension or diabetes — or you log an elderly parent's BP twice a
+            day — the numbers pile up in the worst places: a torn page, three different phone
+            notes, the cuff's own fading memory. At the clinic, nobody can see the trend, so the
+            five minutes you get are spent deciphering instead of deciding.
+          </p>
+          <p class="mt">
+            A useful log needs exactly three things: <strong>dated rows</strong>, <strong>plain
+            averages</strong>, and a format a clinician can scan in seconds. That is the whole job
+            vitalsheet does — and the only job.
+          </p>
+        </div>
+        <div class="scatter" aria-hidden="true">
+          <div class="scrap scrap--1"><span class="num">142/91?</span><small>tue morning</small></div>
+          <div class="scrap scrap--2"><span class="num">131 85</span><small>after walk??</small></div>
+          <div class="scrap scrap--3"><span class="num">sugar 126</span><small>fasting… i think</small></div>
+          <div class="scrap scrap--4"><span class="num">118/82</span><small>on phone, notes app</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 1: LOG ============ -->
+    <section class="section wrap" data-animate>
+      <p class="step-eyebrow">Step 1</p>
+      <h2>Type the number the device shows — two taps and it's a dated row</h2>
+      <div class="split">
+        <div class="demo-panel">
+          <div class="cuff-panel cuff-panel--small" aria-hidden="true">
+            <div class="cuff-panel__row"><span class="seglg">122</span><span class="cuff-panel__slash">/</span><span class="seglg">78</span></div>
+            <div class="cuff-panel__unit">mmHg</div>
+          </div>
+          <svg class="drop-arrow" viewBox="0 0 24 40" aria-hidden="true">
+            <path d="M12 2v28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M5 24l7 10 7-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="row-card anim-rise">
+            <span class="row-card__when num">2026-07-23 &middot; 07:10</span>
+            <span class="row-card__val num">122 / 78</span>
+            <span class="row-card__tag">left arm, seated</span>
+          </div>
+        </div>
+        <div class="split__copy">
+          <p>
+            Date and time are prefilled to <em>now</em>; the fields are large and numeric. Three
+            device modes — <strong>BP</strong> (mmHg, with optional pulse and SpO₂, arm and seated
+            tags), <strong>glucose</strong> (mg/dL with a fasting / after-meal / random context),
+            and <strong>weight</strong> (kg, with a one-time height for BMI).
+          </p>
+          <p class="mt">
+            Every row stays editable and deletable — manual entry means typos are possible, so
+            nothing is ever locked in.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 2: TREND ============ -->
+    <section class="section wrap" data-animate>
+      <p class="step-eyebrow">Step 2</p>
+      <h2>The trend is a table — and the average is honest arithmetic</h2>
+      <p class="section__lede">
+        Rows group by day, newest first. A <strong>7-day</strong> and a <strong>30-day</strong>
+        average sit above them — plain means of exactly what you logged, labelled
+        <em>&ldquo;average of logged readings&rdquo;</em>, never &ldquo;your true BP&rdquo;.
+        The demo below is computed live by this page from the five demo rows, with the same
+        formula the app uses.
+      </p>
+      <div class="trend-demo">
+        <div class="trend-demo__avgs">
+          <div class="avg-card">
+            <span class="avg-card__label">7-day average <span class="avg-card__n" id="avg7-n"></span></span>
+            <span class="avg-card__value num" id="avg7">&hellip;</span>
+          </div>
+          <div class="avg-card">
+            <span class="avg-card__label">30-day average <span class="avg-card__n" id="avg30-n"></span></span>
+            <span class="avg-card__value num" id="avg30">&hellip;</span>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="trend-table">
+            <caption class="visually-hidden">Demo blood-pressure log: five dated readings; rows inside the 7-day window are marked.</caption>
+            <thead>
+              <tr><th scope="col">Date &amp; time</th><th scope="col">Reading (mmHg)</th><th scope="col">Cited band</th><th scope="col">Window</th></tr>
+            </thead>
+            <tbody id="trend-rows">
+              <tr><td colspan="4">Enable JavaScript to see the animated demo — or just open the app itself.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="trend-demo__foot">
+          <button class="btn btn--ghost btn--small" type="button" id="replay-trend">Replay animation</button>
+          <span class="foot-note">Rows marked <strong>in 7-day window</strong> are the ones the 7-day mean uses — dates on or after <span class="num" id="win-start"></span>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 3: BANDS ============ -->
+    <section class="section wrap" data-animate>
+      <p class="step-eyebrow">Step 3</p>
+      <h2>Reference bands are quoted, not judged</h2>
+      <div class="split">
+        <div class="split__copy">
+          <p>
+            Each reading can carry a chip with <strong>published wording only</strong>: the 2017
+            ACC/AHA blood-pressure categories, the ADA glucose target, WHO BMI classes — each with
+            a source and a verified-on date (2026-07-23). When systolic and diastolic fall in two
+            categories, the guideline's own rule applies: <em>the higher category wins</em>.
+          </p>
+          <p class="mt">
+            Out-of-cited-range is marked with a <strong>▲ glyph and text</strong> — never colour
+            alone, and never red/green traffic lights. One toggle hides all band tags. And because
+            the ADA itself says <em>glycemic goals should be individualized</em>, the app repeats
+            that caveat wherever a glucose band appears.
+          </p>
+          <p class="mt">
+            What it will never do: say &ldquo;improving&rdquo;, &ldquo;worsening&rdquo;, compute a
+            risk score, or answer <em>&ldquo;is this bad?&rdquo;</em>. It is a log book, not a
+            diagnosis.
+          </p>
+        </div>
+        <div class="chip-stack" aria-label="Example cited band chips">
+          <div class="band-chip"><span class="num">118/79</span><span class="band-chip__tag">Normal</span></div>
+          <div class="band-chip"><span class="num">124/79</span><span class="band-chip__tag">Elevated</span></div>
+          <div class="band-chip"><span class="num">131/85</span><span class="band-chip__tag">Hypertension Stage 1</span></div>
+          <div class="band-chip band-chip--outside"><span class="num">142/91</span><span class="band-chip__tag">▲ Hypertension Stage 2</span></div>
+          <div class="band-chip band-chip--muted"><span class="num">126 mg/dL</span><span class="band-chip__tag">= <span class="num" id="mmol">7.0</span> mmol/L (÷ 18.016)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 4: HANDOFF ============ -->
+    <section class="section wrap" data-animate>
+      <p class="step-eyebrow">Step 4</p>
+      <h2>The handoff: an A4 sheet and an honest CSV</h2>
+      <div class="split">
+        <div class="printer-demo" aria-hidden="true">
+          <div class="printer-slot"></div>
+          <div class="a4-sheet">
+            <div class="a4-sheet__title">BP log — trend sheet</div>
+            <div class="a4-sheet__row"></div>
+            <div class="a4-sheet__row"></div>
+            <div class="a4-sheet__row"></div>
+            <div class="a4-sheet__row a4-sheet__row--avg"></div>
+            <div class="a4-sheet__notes">clinician notes</div>
+            <div class="a4-sheet__foot">sources &middot; verified-on</div>
+          </div>
+        </div>
+        <div class="split__copy">
+          <p>
+            <strong>Print to A4</strong> uses the browser's own print-to-PDF — no PDF library.
+            The sheet has optional name/DOB fields (kept only on your device), a date-range
+            filter, the averages block, a blank clinician-notes column, and a sources footer
+            with verified-on dates.
+          </p>
+          <p class="mt">
+            <strong>CSV export</strong> is strict RFC-4180 — CRLF line endings, quoted fields —
+            so it opens cleanly in any spreadsheet:
+          </p>
+          <div class="csv-line-wrap"><code class="csv-line num" id="csv-line">2026-07-23 07:10,bp,122,78,"left arm, seated"</code></div>
+          <p class="mt">A full JSON backup export/import and an erase-all control complete the loop: your data, portable and destroyable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRIVACY ============ -->
+    <section class="section section--privacy" data-animate>
+      <div class="wrap">
+        <p class="step-eyebrow">The guarantee</p>
+        <h2>&ldquo;Nothing leaves this device&rdquo; is enforced by the browser, not promised by a policy</h2>
+        <div class="split">
+          <div class="csp-demo">
+            <svg viewBox="0 0 460 180" role="img" aria-label="Diagram: a reading tries to travel from the log sheet to the cloud but is stopped at a wall labelled connect-src none. The browser blocks the request.">
+              <rect x="8" y="52" width="118" height="76" rx="10" class="csp-sheet"/>
+              <text x="67" y="84" text-anchor="middle" class="csp-svg-label">your log</text>
+              <text x="67" y="106" text-anchor="middle" class="csp-svg-num">122/78</text>
+              <path d="M138 90h150" class="csp-path"/>
+              <circle cx="150" cy="90" r="7" class="csp-dot"/>
+              <rect x="296" y="34" width="10" height="112" rx="4" class="csp-wall"/>
+              <text x="301" y="26" text-anchor="middle" class="csp-svg-code">connect-src 'none'</text>
+              <g class="csp-cloud">
+                <path d="M362 96a16 16 0 0 1 6-31 22 22 0 0 1 42-3 15 15 0 0 1-2 34z" class="csp-cloud-shape"/>
+                <path d="M376 74l20 20M396 74l-20 20" class="csp-cloud-x"/>
+              </g>
+              <text x="230" y="166" text-anchor="middle" class="csp-svg-blocked">✕ request refused by the browser</text>
+            </svg>
+          </div>
+          <div class="split__copy">
+            <p>
+              vitalsheet ships this exact <code>Content-Security-Policy</code> in its
+              <code>&lt;head&gt;</code> — and so does this page:
+            </p>
+            <div class="csp-code-wrap"><pre class="csp-code" id="csp-code"><code>default-src 'self'; connect-src 'none';
+img-src 'self' data:; base-uri 'none';
+form-action 'none'; frame-ancestors 'none';
+object-src 'none'</code></pre></div>
+            <p class="mt">
+              <code>connect-src 'none'</code> means the <em>browser itself</em> refuses every
+              network request the page could attempt — fetch, XHR, WebSocket, all of it. No
+              external fonts, no CDN scripts, no analytics, no service worker. Readings live in
+              that browser's local storage and nowhere else; CSV/JSON export is the only way data
+              moves, and you carry the file.
+            </p>
+            <p class="mt foot-note">
+              The honest flip side: clearing site data erases the log, and a static page cannot
+              send reminders. Export a backup regularly; the twice-daily discipline stays with you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURE TOUR ============ -->
+    <section class="section wrap" data-animate>
+      <p class="step-eyebrow">Feature tour</p>
+      <h2>Everything in the tool, in one glance</h2>
+      <div class="feature-grid">
+        <div class="feature"><h3>Three device modes</h3><p>BP (with pulse, SpO₂, arm &amp; seated tags), glucose (mg/dL ⇄ mmol/L display), weight (kg → BMI with one-time height).</p></div>
+        <div class="feature"><h3>Two-tap logging</h3><p>Date &amp; time prefilled, large numeric fields; every row editable and deletable.</p></div>
+        <div class="feature"><h3>Plain averages</h3><p>7-day and 30-day arithmetic means of exactly what you logged — labelled as such.</p></div>
+        <div class="feature"><h3>Cited bands, verbatim</h3><p>ACC/AHA, ADA and WHO wording with verified-on dates; ▲ + text, never colour-only; one toggle hides them all.</p></div>
+        <div class="feature"><h3>A4 print &amp; CSV</h3><p>Clinic-ready print sheet via the browser's print-to-PDF; RFC-4180 CSV per mode and combined.</p></div>
+        <div class="feature"><h3>Backup &amp; erase</h3><p>Full JSON export/import and an erase-all control. Your data, your file, your device.</p></div>
+      </div>
+      <div class="limits">
+        <h3>What it deliberately is not</h3>
+        <p>
+          Not a medical device, and it gives no advice. No symptom or medication journaling, no
+          reminders, no charts pretending to be insight, no Bluetooth import, no accounts, no
+          cloud. Bands are dated population guidelines that may not apply to you — the ADA's own
+          caveat is quoted in-app — and all interpretation belongs with your clinician.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section wrap cta-band" data-animate>
+      <div class="cta-card">
+        <div class="cta-card__lcd" aria-hidden="true"><span class="seglg">120</span><span class="cuff-panel__slash">/</span><span class="seglg">80</span></div>
+        <h2>Start your log before the next appointment</h2>
+        <p>Free, open source (MIT), no sign-up, works offline from the first load.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet/">Open vitalsheet</a>
+          <a class="btn btn--ghost" href="https://github.com/Sreenivas-Sadhu-Prabhakara/vitalsheet">View the source</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p class="footer__disclaimer">
+        <strong>Disclaimer:</strong> this page and the vitalsheet app provide general
+        informational logging and cited reference bands for educational purposes only. They are
+        <strong>not a medical device, not medical advice, and not a substitute for professional
+        care</strong>; they do not diagnose or interpret readings and never answer &ldquo;is this
+        bad?&rdquo;. Reference bands are dated population guidelines (sources verified
+        2026-07-23) and may not apply to you — always consult a qualified clinician about your
+        readings and targets. Software provided under the MIT License, &ldquo;as is&rdquo;,
+        without warranty of any kind.
+      </p>
+      <p class="footer__meta">
+        <a href="https://sreenivas-sadhu-prabhakara.github.io/vitalsheet/">vitalsheet — the app</a> &middot;
+        <a href="https://github.com/Sreenivas-Sadhu-Prabhakara/vitalsheet-explained">source of this page</a> &middot;
+        MIT © 2026 Sreenivas Sadhu Prabhakara &middot; This page also ships
+        <code>connect-src 'none'</code> — it cannot see you.
+      </p>
+    </div>
+  </footer>
+
+  <script src="data/facts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

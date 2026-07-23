@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="vitalsheet explained">
+  <rect width="64" height="64" rx="14" fill="#0A0B0C"/>
+  <rect x="4" y="4" width="56" height="56" rx="11" fill="none" stroke="#34D6C0" stroke-width="2"/>
+  <text x="29" y="29" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" font-weight="800" fill="#4FEAD2">120</text>
+  <text x="29" y="50" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" font-weight="800" fill="#4FEAD2">80</text>
+  <line x1="17" y1="35" x2="41" y2="35" stroke="#45494f" stroke-width="2" stroke-linecap="round"/>
+  <path d="M46 27l9 5.5-9 5.5z" fill="#34D6C0"/>
+</svg>
